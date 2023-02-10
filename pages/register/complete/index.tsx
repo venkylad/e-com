@@ -27,8 +27,6 @@ const CompleteRegistration = () => {
   const router = useRouter();
 
   const onSubmit = ({ password }: any) => {
-    // router.push("/login");
-
     signInWithEmailLink(auth, email, window.location.href)
       .then((result) => {
         if (result.user.emailVerified) {
@@ -39,14 +37,16 @@ const CompleteRegistration = () => {
           if (user !== null) {
             updatePassword(user, password);
             const idTokenResults = getIdTokenResult(user)
-              .then((res) => console.log(res))
-              .catch((err) => console.log(err));
-            console.log(idTokenResults, "jaffa");
+              .then((res) => {
+                toast.success("Successfully added password");
+                setTimeout(() => router.push("/login"), 1500);
+              })
+              .catch((err) => {
+                toast.error(err.message);
+                console.log(err);
+              });
           }
         }
-
-        // console.log(result);
-        toast.success("Successfully added password");
       })
       .catch((error) => {
         console.log(error);
