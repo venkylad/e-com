@@ -17,9 +17,11 @@ const Register = () => {
     handleSubmit,
   } = useForm<FormData>();
 
+  console.log(process.env.NEXT_PUBLIC_REGISTER_REDIRECT_URL);
+
   const onSubmit = ({ email }: any) => {
     const actionCodeSettings = {
-      url: "http://localhost:3000/register/complete",
+      url: `${process.env.NEXT_PUBLIC_REGISTER_REDIRECT_URL}`,
       handleCodeInApp: true,
     };
     sendSignInLinkToEmail(auth, email, actionCodeSettings)
