@@ -39,7 +39,7 @@ const CompleteRegistration = () => {
             const idTokenResults = getIdTokenResult(user)
               .then((res) => {
                 toast.success("Successfully added password");
-                setTimeout(() => router.push("/login"), 1500);
+                setTimeout(() => router.push("/"), 1500);
               })
               .catch((err) => {
                 toast.error(err.message);
